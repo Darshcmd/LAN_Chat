@@ -1,6 +1,5 @@
-
-````
 # 🖧 Python LAN Chat App (Terminal-Based)
+````
 
 A simple LAN-based real-time chat system using Python sockets.  
 This project allows multiple users on the same Wi-Fi network to communicate using the terminal — no internet or browser required.
@@ -127,6 +126,6 @@ LANchat/
 ## 📌 Credits
 
 Built with ❤️ by **Darsh Soni and Pritisha Mishra**
-For the **Computer Networks] Project**
+For the **Computer Networks Project**
 
 ---
