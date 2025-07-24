@@ -1,0 +1,64 @@
+# ================================
+# Chat Client (Computer Networks Project)
+# ================================
+
+import socket
+import threading
+
+# Ask user to enter a nickname (App-layer identity)
+nickname = input("Enter your nickname: ").strip()
+while not nickname:
+    nickname = input("Nickname cannot be empty. Try again: ").strip()
+
+# -------- CN Concept: IP Addressing --------
+# Below is localhost (loopback IP address - for testing on same machine)
+SERVER_IP = '00.000.00.000' #Your Host Computer IP
+
+# Port number must match the server's port
+PORT = 8000
+
+# -------- CN Concept: TCP Socket --------
+# SOCK_STREAM = TCP = connection-oriented, reliable delivery
+client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+# -------- CN Concept: TCP 3-Way Handshake --------
+# connect() initiates the TCP connection with server (SYN → SYN-ACK → ACK)
+try:
+    client_socket.connect((SERVER_IP, PORT))
+    print(f"[CONNECTED] Connected to server at {SERVER_IP}:{PORT}")
+except:
+    print("Unable to connect to the server.")
+    exit()
+
+# Receive messages from server
+def receive_messages():
+    while True:
+        try:
+            message = client_socket.recv(1024).decode()
+            if message:
+                print("\n" + message)
+            else:
+                break  # Server disconnected
+        except:
+            break  # Network error or closed connection
+
+# Send messages to server
+def send_messages():
+    while True:
+        try:
+            message = input()
+            if message.strip():
+                full_message = f"{nickname}: {message}"
+                # -------- CN Concept: Application Layer Message --------
+                # This message is passed from application → transport → network → link layers
+                client_socket.send(full_message.encode())
+        except:
+            break
+
+# -------- CN Concept: Full-Duplex Communication --------
+# Client can send and receive simultaneously using threads
+recv_thread = threading.Thread(target=receive_messages)
+send_thread = threading.Thread(target=send_messages)
+
+recv_thread.start()
+send_thread.start()
