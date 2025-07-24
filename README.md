@@ -89,7 +89,7 @@ You will be prompted to enter a nickname, then you can start chatting!
 
 ```
 Darsh: Hey everyone!
-Ritika: Hello Darsh 👋
+Pritisha: Hello Darsh 👋
 Raj: Good to see this working!
 ```
 
@@ -130,4 +130,3 @@ Built with ❤️ by **Darsh Soni and Pritisha Mishra**
 For the **Computer Networks] Project**
 
 ---
-````
